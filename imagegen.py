@@ -20,6 +20,7 @@ def write_text():
     # Write each tuple on a separate line
     i=0
     print(listnames)
+    imageoutput = []
     for t in listnames:
         x, y = 512, 300
         print(t)
@@ -48,13 +49,16 @@ def write_text():
         y += line_height
         draw.text((x, y), text1, fill="black", font=font)
         image.save(output_path)
+        imageoutput.append(output_path)
         i+=1
      # Save the image
     
     print(f"Saved image with text to {output_path}")
+    return(imageoutput)
 
 if __name__ == "__main__":
-    write_text()
+    imageoutput = write_text()
+    print(imageoutput)
 
 
 

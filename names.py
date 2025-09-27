@@ -16,6 +16,10 @@ def getnames():
     text_columns = newnames.iloc[:, [1,2]]
 
     listnames = [tuple(row) for _, row in text_columns.iterrows()]
+
+ 
+
+       
     return listnames
 
 if __name__ == "__main__":
