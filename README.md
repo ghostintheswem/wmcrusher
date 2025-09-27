@@ -8,4 +8,7 @@ To do:
 - fix formatting of images to standard of previous account
 - create github website publishing, rss feed
 - finish instagram api uploading
-- add 
+- add simple filtering and approval process
+- find original account author and see if we just reinvented the wheel
+- inevitably find a github repo that already does all of this
+- shoehorn in AI
