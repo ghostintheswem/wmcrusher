@@ -17,7 +17,13 @@ def getnames():
 
     listnames = [tuple(row) for _, row in text_columns.iterrows()]
 
- 
+    wrongI = []
+    for i in range(0,len(listnames)):
+        if len(listnames[i][0]) > 18:
+            wrongI.append(i) 
+
+    for j in wrongI:
+        listnames.pop(i)
 
        
     return listnames
