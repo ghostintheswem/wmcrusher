@@ -53,18 +53,18 @@ def filter():
 def write_text(text,index):
     """this creates the image, great function naming"""
 
-    image_size = 1664
-    x, y = 832, 200
+    image_size = 1024
+    x, y = 512, 200
     
     try:
-        font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=150)
+        font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=110)
     except IOError:
         font = ImageFont.load_default()
     
-    image = Image.open('resources/template.png')
+    image = Image.open('final_layered_border_image.png')
     draw = ImageDraw.Draw(image)
     output_path = f'output/{str(index)}output_image.png'
-    line_height = 150
+    line_height = 110
         
     bbox = draw.textbbox((0, 0), text[0], font=font)
     text_width = bbox[2] - bbox[0]
