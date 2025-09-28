@@ -201,15 +201,15 @@ def layer_random_pngs_on_border(background_path, foreground_paths, output_path, 
 
 
 foregrounds = []
-for i in range(0,377):
+for i in range(0,376):
     foregrounds.append("decoration"+str(i)+".png")
 
 papers = []
-for i in range(0,44):
+for i in range(0,43):
     papers.append("paper"+str(i)+".png")
 
 backgrounds = []
-for i in range(0,27):
+for i in range(0,26):
     backgrounds.append(foregrounds.append("background"+str(i)+".jpg"))
 
 # --- Execution ---

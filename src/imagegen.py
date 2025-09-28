@@ -1,5 +1,6 @@
 from names import getnames
 from PIL import Image, ImageDraw, ImageFont
+import json
 
 # thanks chatgpt
 # updated version at printimage.py
@@ -26,7 +27,13 @@ def wrap_text(text, max_length=18):
 
 def filter():
     """this prevents too long responses from being generated"""
-    listnames = getnames()
+    
+    with open("./data.json", "r") as f:
+        loaded = json.load(f)
+    listnames = [tuple(item) for item in loaded]
+    print(listnames)
+
+
     i=0
     for name in listnames:
         if len(name[0]) and len(name[1]) < 19:
