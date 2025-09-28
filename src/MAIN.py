@@ -5,14 +5,18 @@ from time import sleep
 from names import getnames
 from backgrounds import create_image
 from printimage import wrap_text, write_text
-
+import json
 
 
 def main():
 
     # 1. Get the names (already done)
     # listnames = getnames()
-    listnames = [('testing', 'testing'), ('Hello', 'World'), ('&Hacks', 'so amazing'), ('1234567891234567891', '1234567891234567891'), ('12345678912345678', '12345678912345678'), ('123456789123456789', '123456789123456789\n123456789123456789\n123456789123456789\n123456789123456789'), ('Your Mom', 'Your mom!'), ('Shawty', 'Shawty you so fine bae'), ('François Hollande 🤨', '🏋🏻\u200d♀️🤸🏾\u200d♀️🧘🏽\u200d♀️  🏂🤸🏾\u200d♀️🤾🏿\u200d♀️🤼\u200d♀️🤾🏿\u200d♀️🤼\u200d♀️🤼\u200d♀️🤼🤾🏿\u200d♀️🤼\u200d♂️'), ('Homer         Simpson', "I'm calling out from Springfield, I'm calling out from Simpsons' world."), ('&hacks', 'I love it here!'), ('my ac unit', 'botetourt would be hell without you bestie')]
+    with open("./data.json", "r") as f:
+        loaded = json.load(f)
+    listnames = [tuple(item) for item in loaded]
+
+    # listnames = [('testing', 'testing'), ('Hello', 'World'), ('&Hacks', 'so amazing'), ('1234567891234567891', '1234567891234567891'), ('12345678912345678', '12345678912345678'), ('123456789123456789', '123456789123456789\n123456789123456789\n123456789123456789\n123456789123456789'), ('Your Mom', 'Your mom!'), ('Shawty', 'Shawty you so fine bae'), ('François Hollande 🤨', '🏋🏻\u200d♀️🤸🏾\u200d♀️🧘🏽\u200d♀️  🏂🤸🏾\u200d♀️🤾🏿\u200d♀️🤼\u200d♀️🤾🏿\u200d♀️🤼\u200d♀️🤼\u200d♀️🤼🤾🏿\u200d♀️🤼\u200d♂️'), ('Homer         Simpson', "I'm calling out from Springfield, I'm calling out from Simpsons' world."), ('&hacks', 'I love it here!'), ('my ac unit', 'botetourt would be hell without you bestie')]
     print("Names from database:", listnames)
 
     # 2. Generate an image with that data (use first name as example)
