@@ -3,7 +3,26 @@ from PIL import Image, ImageDraw, ImageFont
 
 # thanks chatgpt
 
-    
+def wrap_text(text, max_length=18):
+    words = text.split()
+    lines = []
+    current_line = ""
+
+    for word in words:
+        # Check if adding the next word would exceed the max length
+        if len(current_line) + len(word) + (1 if current_line else 0) <= max_length:
+            if current_line:
+                current_line += " "
+            current_line += word
+        else:
+            lines.append(current_line)
+            current_line = word
+
+    if current_line:
+        lines.append(current_line)
+
+    return '\n'.join(lines)
+
 def filter():
     """this prevents too long responses from being generated"""
     listnames = getnames()
@@ -12,17 +31,22 @@ def filter():
         if len(name[0]) and len(name[1]) < 19:
             write_text(name,i)
             i+=1
+        elif len(name[0]) < 19:
+            new = []
+            new.append(name[0])
+            new.append(wrap_text(name[1]))
+            write_text(new,i)
+            i+=1
         else:
             print(name)
             print("could not print because it was too long")
-            return
             
 
 def write_text(text,index):
     """this creates the image, great function naming"""
 
     image_size = 1664
-    x, y = 832, 400
+    x, y = 832, 200
     
     try:
         font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=150)
@@ -32,7 +56,7 @@ def write_text(text,index):
     image = Image.open('resources/template.png')
     draw = ImageDraw.Draw(image)
     output_path = f'output/{str(index)}output_image.png'
-    line_height = 100
+    line_height = 150
         
     bbox = draw.textbbox((0, 0), text[0], font=font)
     text_width = bbox[2] - bbox[0]
@@ -49,7 +73,8 @@ def write_text(text,index):
     y = (image_size - text_height) / 2
 
     y += line_height
-    draw.text((x, y), text[1], fill="#181818", font=font)
+    print(text[1])
+    draw.multiline_text((x, y), text[1], fill="#181818", font=font, spacing=4)
     image.save(output_path)
 
 if __name__ == "__main__":
