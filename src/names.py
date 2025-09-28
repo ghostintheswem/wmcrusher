@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 def getnames():
-    """calls import and returns tuples in list"""
+    """calls import function and returns tuples in list"""
 
     newnames = importdata()
     newnames['Timestamp'] = pd.to_datetime(newnames['Timestamp'])

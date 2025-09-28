@@ -11,4 +11,4 @@ To do:
 - add simple filtering and approval process
 - find original account author and see if we just reinvented the wheel
 - inevitably find a github repo that already does all of this
-- shoehorn in AI
+- ~~shoehorn in~~ AI gemini moderator

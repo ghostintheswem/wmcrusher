@@ -4,16 +4,19 @@ import os
 import schedule
 
 def login_user():
+    """this logs into instagram, please fix the exposed info"""
     cl = Client()
     cl.login("wm_.crushes", "hackerhacker1")
     print("Successfully logged in")
     return cl
 
 def post_image(cl, image_path, caption):
+    """this posts the image after logging in"""
     cl.photo_upload(path=image_path, caption=caption)
     print(f"Posted image: {image_path}")
 
 def generate_daily_schedule(image_folder, start_time):
+    """chat gpt thought this was a good idea, unused"""
     images = os.listdir(image_folder)
     schedule_times = []
     current_time = start_time
@@ -25,6 +28,7 @@ def generate_daily_schedule(image_folder, start_time):
     return schedule_times
 
 def schedule_and_post():
+    """chat gpt thought this was a good idea, unused"""
     cl = login_user()
     image_folder = 'output'
     images = os.listdir(image_folder)
@@ -43,6 +47,7 @@ def schedule_and_post():
 if __name__ == "__main__":
     cl = login_user()
     image_path="output/2output_image.png"
+    # this must be manually changed to change which image singular is posted
     caption="this is our test!"
     post_image(cl, image_path, caption)
     print("test")

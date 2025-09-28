@@ -15,7 +15,7 @@ import pandas as pd
 
 def getcaption():
     """use gemini api to procedurally generate a caption based on responses"""
-    names = getnames()
+    names = getnames() # not yet functional
     data = []
     for name in names:
         data.append(name[1])
