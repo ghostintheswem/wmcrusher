@@ -1,5 +1,5 @@
 const feed = document.getElementById('feed');
-const imageCount = 10; // Adjust based on how many images you have
+const imageCount = 12; // Adjust based on how many images you have
 
 for (let i = 0; i < imageCount; i++) {
   const img = document.createElement('img');
