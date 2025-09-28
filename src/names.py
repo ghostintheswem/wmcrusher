@@ -2,6 +2,7 @@ from responses import importdata
 import pandas as pd
 from datetime import datetime, timedelta
 from gemini import moderate_me, generate_caption
+import json
 
 def getnames():
     """calls import function and returns tuples in list"""
@@ -29,6 +30,9 @@ def getnames():
     #    listnames.pop(i)
 
     outputnames = moderate_me(listnames)
+    with open("data.json", "w") as f:
+        json.dump(outputnames, f)
+        
     return outputnames
 
 if __name__ == "__main__":

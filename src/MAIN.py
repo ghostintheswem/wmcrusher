@@ -2,8 +2,9 @@ import os
 import sys
 import importlib
 from time import sleep
-
 from names import getnames
+from backgrounds import create_image
+from printimage import wrap_text, write_text
 
 
 
@@ -15,13 +16,12 @@ def main():
     print("Names from database:", listnames)
 
     # 2. Generate an image with that data (use first name as example)
-    from imagegen import write_text
+
     if not listnames:
         print("No names found.")
         return
     
-    from imagetest import create_image
-    from imagegen import wrap_text
+
 
     image_index = 20
     for name in listnames:  # (name, message)

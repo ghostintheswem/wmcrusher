@@ -2,6 +2,7 @@ from names import getnames
 from PIL import Image, ImageDraw, ImageFont
 
 # thanks chatgpt
+# updated version at printimage.py
 
 def wrap_text(text, max_length=18):
     words = text.split()

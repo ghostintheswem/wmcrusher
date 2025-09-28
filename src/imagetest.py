@@ -2,6 +2,8 @@ import random
 import os
 from PIL import Image, ImageDraw, ImageFont
 
+# updated version at backgrounds.py
+
 def layer_png_with_border(background_path, foreground_path, output_path, border_size_pixels):
     """
     Layers a PNG image (foreground) onto a square background image.
