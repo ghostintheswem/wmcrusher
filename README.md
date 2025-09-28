@@ -16,3 +16,4 @@ To do:
 - procedurally generate the backgrounds
 - AI generated backgrounds
 - ~~shoehorn in~~ AI gemini moderator
+- fix API call so that only new responses are checked! check only once so we don't get rate limited
