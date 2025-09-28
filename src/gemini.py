@@ -29,7 +29,7 @@ def moderate_me(nameslist):
         """
 
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-2.5-flash-lite",
             contents=prompt,
             config=types.GenerateContentConfig(
                 thinking_config=types.ThinkingConfig(thinking_budget=0) # Disables thinking
@@ -40,6 +40,7 @@ def moderate_me(nameslist):
             outputlist.append(text)
         else:
             print("the internet is terrible, see")
+            print(text)
         
     return outputlist
 
@@ -61,7 +62,7 @@ def generate_caption(data):
     "{data}"
     """
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-2.5-flash-lite",
         contents=prompt,
         config=types.GenerateContentConfig(
             thinking_config=types.ThinkingConfig(thinking_budget=0) # Disables thinking

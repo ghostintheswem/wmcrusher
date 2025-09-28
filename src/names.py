@@ -1,6 +1,7 @@
 from responses import importdata
 import pandas as pd
 from datetime import datetime, timedelta
+from gemini import moderate_me, generate_caption
 
 def getnames():
     """calls import function and returns tuples in list"""
@@ -27,8 +28,8 @@ def getnames():
     # for j in wrongI:
     #    listnames.pop(i)
 
-       
-    return listnames
+    outputnames = moderate_me(listnames)
+    return outputnames
 
 if __name__ == "__main__":
     listnames = getnames()
