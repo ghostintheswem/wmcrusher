@@ -4,6 +4,8 @@ import os
 import schedule
 from dotenv import load_dotenv
 load_dotenv()
+from gemini import generate_caption
+import json
 
 def login_user():
     """this logs into instagram, please fix the exposed info"""
@@ -52,6 +54,9 @@ if __name__ == "__main__":
     cl = login_user()
     image_path="output/8output_image.png"
     # this must be manually changed to change which image singular is posted
-    caption="this is our test!"
+    with open("./data.json", "r") as f:
+        loaded = json.load(f)
+    data = [tuple(item) for item in loaded]
+    caption = generate_caption(data)
     post_image(cl, image_path, caption)
     print("Success!")
