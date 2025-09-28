@@ -8,6 +8,8 @@ def layer_png_with_border(background_path, foreground_path, output_path, border_
     The PNG is scaled to be as large as possible within a frame,
     maintaining its aspect ratio and not touching the border.
 
+    stuff.png should be scatted on top of paper.png which should be layerd over square.jpg
+
     background_path (str): File path to the square background image (e.g., 'bg.jpg').
     foreground_path (str): File path to the transparent PNG (foreground) (e.g., 'fg.png').
     output_path (str): File path to save the resulting image (e.g., 'layered_image.png').

@@ -8,36 +8,41 @@ from dotenv import load_dotenv
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-def moderate_me(text):
-    """take in tuple and return if appropriate using sentiment analysis"""
+def moderate_me(nameslist):
+    """take in list of tuples and return if appropriate using sentiment analysis"""
 
-    name = text[0]
-    content = text[1]
+    outputlist = []
+    for text in nameslist:
+        name = text[0]
+        content = text[1]
 
-    prompt = f"""
-    You're an assistant that reviews messages before posting them publicly on Instagram.
+        prompt = f"""
+        You're an assistant that reviews messages before posting them publicly on Instagram.
 
-    Determine if the following message is appropriate for an Instagram post.
+        Determine if the following message is appropriate for a casual fun Instagram post. A message is inappropriate only if it is vulgar or rude or mean.
+        Positive or excited posts should be allowed.
 
-    Respond only with "Yes" if appropriate, or "No" if not.
+        Respond only with "Yes" if appropriate, or "No" if not.
 
-    Message:
-    "{name} {content}"
-    """
+        Message:
+        "{name} {content}"
+        """
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            thinking_config=types.ThinkingConfig(thinking_budget=0) # Disables thinking
-        ),
-    )
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                thinking_config=types.ThinkingConfig(thinking_budget=0) # Disables thinking
+            ),
+        )
 
-    if response.text.strip() == "Yes":
-        return text
-    else:
-        print("the internet is terrible, see")
-        print(text)
+        if response.text.strip() == "Yes":
+            outputlist.append(text)
+        else:
+            print("the internet is terrible, see")
+        
+    return outputlist
+
 
 def generate_caption(data):
     """create a nice message from the week's acceptable posts"""
@@ -47,7 +52,9 @@ def generate_caption(data):
     prompt = f"""
     You're a writer who writes catchy captions for Instagram.
 
-    Write a short caption with only emojis that will hook readers.
+    Write one short poetic caption with at least 5 emojis that will hook readers.
+
+    Respond only with only the caption.
 
     Use the information provided on the following people:
 
@@ -67,9 +74,9 @@ def generate_caption(data):
     # return("🤖")
 
 if __name__ == "__main__":
-    naughty = ("bitch ass whore ass cunt fuck","luck be a lady he is rude and unkind")
-    nice = ("Alex Alex Alex Taylor", "never have I ever seen a hotter guy")
-    moderate_me(naughty)
-    moderate_me(nice)
-    print(generate_caption(nice))
+    naughtynice = [("bitch ass whore ass cunt fuck","luck be a lady he is rude and unkind"), ("Alex Alex Alex Taylor", "never have I ever seen a hotter guy")]
+
+    store = moderate_me(naughtynice)
+    print(store)
+    print(generate_caption(store))
 
