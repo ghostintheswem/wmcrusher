@@ -42,7 +42,7 @@ def schedule_and_post():
 
 if __name__ == "__main__":
     cl = login_user()
-    image_path="output/0output_image.png"
+    image_path="output/2output_image.png"
     caption="this is our test!"
     post_image(cl, image_path, caption)
     print("test")

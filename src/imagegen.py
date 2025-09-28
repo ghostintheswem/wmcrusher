@@ -19,11 +19,11 @@ def filter():
 
 def write_text(text,index):
 
-    image_size = 1024
-    x, y = 512, 300
+    image_size = 1664
+    x, y = 832, 400
     
     try:
-        font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=120)
+        font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=150)
     except IOError:
         font = ImageFont.load_default()
     
@@ -38,7 +38,7 @@ def write_text(text,index):
     x = (image_size - text_width) / 2
     y = (image_size - text_height) / 3
 
-    draw.text((x, y), text[0], fill="black", font=font)
+    draw.text((x, y), text[0], fill="#181818", font=font)
 
     bbox = draw.textbbox((0, 0), text[1], font=font)
     text_width = bbox[2] - bbox[0]
@@ -47,7 +47,7 @@ def write_text(text,index):
     y = (image_size - text_height) / 2
 
     y += line_height
-    draw.text((x, y), text[1], fill="black", font=font)
+    draw.text((x, y), text[1], fill="#181818", font=font)
     image.save(output_path)
 
 if __name__ == "__main__":

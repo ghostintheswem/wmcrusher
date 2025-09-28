@@ -13,6 +13,15 @@ import pandas as pd
 # authenticated GoogleAuth instance
 # drive = GoogleDrive(gauth)
 
+def getcaption():
+    """use gemini api to procedurally generate a caption based on responses"""
+    names = getnames()
+    data = []
+    for name in names:
+        data.append(name[1])
+
+    #feed this into gemini with a prompt, just to burn some more of the earth
+
 def importdata():
     """uses the google drive API to get responses and saves to spreadsheet, returns pandas dataframe"""
 
