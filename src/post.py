@@ -2,11 +2,15 @@ from instagrapi import Client
 from datetime import datetime, timedelta
 import os
 import schedule
+from dotenv import load_dotenv
+load_dotenv()
 
 def login_user():
     """this logs into instagram, please fix the exposed info"""
     cl = Client()
-    cl.login("wm_.crushes", "hackerhacker1")
+    user = os.getenv("INSTAGRAM_USERNAME")
+    password = os.getenv("INSTAGRAM_PASSWORD")
+    cl.login(user, password)
     print("Successfully logged in")
     return cl
 
@@ -46,8 +50,8 @@ def schedule_and_post():
 
 if __name__ == "__main__":
     cl = login_user()
-    image_path="output/2output_image.png"
+    image_path="output/8output_image.png"
     # this must be manually changed to change which image singular is posted
     caption="this is our test!"
     post_image(cl, image_path, caption)
-    print("test")
+    print("Success!")
