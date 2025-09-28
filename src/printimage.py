@@ -4,7 +4,7 @@ import json
 
 # thanks chatgpt
 
-def wrap_text(text, max_length=18):
+def wrap_text(text, max_length=16):
     words = text.split()
     lines = []
     current_line = ""
@@ -35,10 +35,10 @@ def filter():
 
     i=0
     for name in listnames:
-        if len(name[0]) and len(name[1]) < 19:
+        if len(name[0]) and len(name[1]) < 16:
             write_text(name,i)
             i+=1
-        elif len(name[0]) < 19:
+        elif len(name[0]) < 16:
             new = []
             new.append(name[0])
             new.append(wrap_text(name[1]))
@@ -56,14 +56,14 @@ def write_text(text, index, input_path):
     x, y = 512, 200
     
     try:
-        font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=150)
+        font = ImageFont.truetype("Atkinson-Hyperlegible-Regular-102.otf", size=110)
     except IOError:
         font = ImageFont.load_default()
     
     image = Image.open(input_path)
     draw = ImageDraw.Draw(image)
     output_path = f'output/{str(index)}output_image.png'
-    line_height = 150
+    line_height = 110
         
     bbox = draw.textbbox((0, 0), text[0], font=font)
     text_width = bbox[2] - bbox[0]
