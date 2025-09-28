@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 
     
 def filter():
+    """this prevents too long responses from being generated"""
     listnames = getnames()
     i=0
     for name in listnames:
@@ -18,6 +19,7 @@ def filter():
             
 
 def write_text(text,index):
+    """this creates the image, great function naming"""
 
     image_size = 1664
     x, y = 832, 400

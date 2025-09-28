@@ -49,4 +49,4 @@ def importdata():
     return(dataframe)
 
 if __name__ == "__main__":
-    importdata()
+    print(importdata())
