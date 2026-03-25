@@ -1,41 +1,40 @@
 from responses import importdata
 import pandas as pd
-from datetime import datetime, timedelta
-from gemini import moderate_me, generate_caption
+from gemini import moderate_me
 import json
 
-def getnames():
-    """calls import function and returns tuples in list"""
+DATA_FILE = "./data.json"
 
-    newnames = importdata()
-    newnames['Timestamp'] = pd.to_datetime(newnames['Timestamp'])
+def getnames(only_new: bool = True) -> list[tuple]:
+    """
+    Fetches form responses, runs them through Gemini moderation,
+    persists approved entries to data.json, and returns them as
+    a list of (name, message) tuples.
 
-    now = datetime.now()
-    one_week_ago = now - timedelta(days=7)
-    past_week_df = newnames[newnames['Timestamp'] >= one_week_ago]
+    Args:
+        only_new: Passed through to importdata(). True by default so we never
+                  re-process entries we've already seen.
+    """
+    newnames = importdata(only_new=only_new)
 
-    text_columns = newnames.iloc[:, [1,2]]
+    if newnames.empty:
+        print("No new responses to process.")
+        return []
 
+    # Columns: index 1 = name submitted, index 2 = message submitted
+    text_columns = newnames.iloc[:, [1, 2]]
     listnames = [tuple(row) for _, row in text_columns.iterrows()]
 
-    # sorry i had to comment this out because it wasn't working
-    # I've moved all the length stuff into imagegen.py filter function
-    
-    # wrongI = []
-    # for i in range(0,len(listnames)):
-    #     if len(listnames[i][0]) > 18:
-    #         wrongI.append(i) 
+    print(f"Running {len(listnames)} response(s) through moderation...")
+    approved = moderate_me(listnames)
+    print(f"{len(approved)}/{len(listnames)} response(s) passed moderation.")
 
-    # for j in wrongI:
-    #    listnames.pop(i)
+    with open(DATA_FILE, "w") as f:
+        json.dump(approved, f, indent=2)
 
-    outputnames = moderate_me(listnames)
-    with open("data.json", "w") as f:
-        json.dump(outputnames, f)
-        
-    return outputnames
+    return approved
+
 
 if __name__ == "__main__":
-    listnames = getnames()
-    print(listnames)
-
+    names = getnames()
+    print(names)
