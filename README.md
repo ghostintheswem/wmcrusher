@@ -35,14 +35,14 @@ Someone fills out the Google Form → responses save to a Google Sheet → the p
    pip install pillow pandas instagrapi pydrive python-dotenv google-generativeai
    ```
 
-2. Create a `.env` file:
+2. Add your credentials to a `.env` file in the project root (create it if it doesn't exist):
    ```
    INSTAGRAM_USERNAME=your_username
    INSTAGRAM_PASSWORD=your_password
    GEMINI_API_KEY=your_key
    ```
 
-3. Place `credentials.json` (Google OAuth) in the project root. On first run it will open a browser to authenticate and save the token.
+3. Place `client_secrets.json` (Google OAuth app credentials) in the project root. On first run it will open a browser to authenticate and save the token to `credentials.json`.
 
 4. Place `Atkinson-Hyperlegible-Regular-102.otf` in the project root.
 
@@ -59,22 +59,22 @@ Someone fills out the Google Form → responses save to a Google Sheet → the p
 
 **Full pipeline (recommended):**
 ```bash
-python MAIN.py
+python src/MAIN.py
 ```
 
 **Skip the interactive approval step:**
 ```bash
-python MAIN.py --skip-review
+python src/MAIN.py --skip-review
 ```
 
 **Regenerate images without hitting the Google API:**
 ```bash
-python MAIN.py --no-fetch
+python src/MAIN.py --no-fetch
 ```
 
 **Post images manually after generating them:**
 ```bash
-python post.py --folder output
+python src/post.py --folder output
 ```
 
 ---
@@ -83,21 +83,32 @@ python post.py --folder output
 
 ```
 wmcrusher/
-├── MAIN.py           # Runs the full pipeline
-├── responses.py      # Fetches form responses from Google Drive
-├── names.py          # Orchestrates fetch + moderation, saves data.json
-├── gemini.py         # Gemini moderation and caption generation
-├── backgrounds.py    # Composites layered background images
-├── printimage.py     # Renders name + message text onto backgrounds
-├── post.py           # Posts images to Instagram
-├── data.json         # Approved entries from last run (auto-generated)
-├── last_seen.json    # Timestamp checkpoint (auto-generated)
-├── credentials.json  # Google OAuth token (do not commit)
-├── .env              # Instagram + Gemini credentials (do not commit)
-└── resources/
-    ├── square/       # Background photos (background0.jpg … background25.jpg)
-    ├── paper/        # Paper texture PNGs (paper0.png … paper42.png)
-    └── stuff/        # Decoration PNGs (decoration0.png … decoration207.png)
+├── src/
+│   ├── MAIN.py           # Runs the full pipeline
+│   ├── responses.py      # Fetches form responses from Google Drive
+│   ├── names.py          # Orchestrates fetch + moderation, saves data.json
+│   ├── gemini.py         # Gemini moderation and caption generation
+│   ├── backgrounds.py    # Composites layered background images
+│   ├── printimage.py     # Renders name + message text onto backgrounds
+│   ├── imagegen.py       # Earlier version of printimage.py
+│   ├── imagetest.py      # Earlier version of backgrounds.py
+│   └── post.py           # Posts images to Instagram
+├── resources/
+│   ├── square/           # Background photos (background0.jpg … background25.jpg)
+│   ├── paper/            # Paper texture PNGs (paper0.png … paper42.png)
+│   └── stuff/            # Decoration PNGs (decoration0.png … decoration207.png)
+├── output/               # Generated images land here
+├── originals/            # Original asset source files
+├── data.json             # Approved entries from last run (auto-generated)
+├── last_seen.json        # Timestamp checkpoint (auto-generated)
+├── ourdata.xls           # Downloaded form responses (auto-generated)
+├── credentials.json      # Google OAuth token (do not commit)
+├── client_secrets.json   # Google OAuth app credentials (do not commit)
+├── requirements.txt      # Python dependencies
+├── index.html            # GitHub Pages site
+├── style.css
+├── script.js
+└── LICENSE
 ```
 
 ---
